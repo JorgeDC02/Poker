@@ -13,7 +13,7 @@ public class Pruebas {
         
         Baraja baraja = new Baraja();
         
-        Poker poker = new Poker(baraja,2);
+        Poker poker = new Poker(baraja,3);
         poker.crearCartaPoker();
         poker.jugar();  
         

@@ -22,7 +22,7 @@ public class Poker {
         this.poquer = BarajaPoquer;
         this.jugador = new Jugador[nJugadores];
         for(int i=0; i<nJugadores; i++){
-            this.jugador[i] = new Jugador();
+            this.jugador[i] = new Jugador(i+1);
         }
         
     }
@@ -60,9 +60,10 @@ public class Poker {
          this.barajarCartasPoker();
          repartirCartaPoker();
          descartarCartaPoker();
-         //calcularGanador();
+         //this.poquer.mostrar();
     }
     
+    //Metodo creado para comprovar el orden de las cartas (solo usado para pruebas)
     public void verBaraja(){
         poquer.mostrar();
     }
@@ -75,7 +76,7 @@ public class Poker {
         System.out.println("--Se han repartido cartas:--");
         for(int i=0; i<this.jugador.length; i++){
             this.jugador[i].setMano(this.poquer.repartir(this.nCartas));
-            jugador[i].mostrarMano(i+1); 
+            jugador[i].mostrarMano(); 
         }
     }
     
@@ -85,9 +86,9 @@ public class Poker {
            System.out.println("\n----Ronda: "+ronda+" ----");
            for(int i=0; i<this.jugador.length; i++){
             this.jugador[i].compararCartas();
-            //this.poquer.getCard().add(this.jugador[0].descartarCarta());//devuelve la carta descartada a la baraja
             
-            this.jugador[i].prepararJugada(this.poquer.getCard().get(0), i+1);
+            this.jugador[i].prepararJugada(this.poquer.getCard().get(0));
+            //this.poquer.getCard().add(this.jugador[0].descartarCarta());//devuelve la carta descartada a la baraja
             
             this.poquer.getCard().remove(this.poquer.getCard().get(0));
             
@@ -108,8 +109,7 @@ public class Poker {
                winner = this.jugador[i].getPuntos();
                numGan = i;
             }
-        }
-        
-        System.out.println("\n----Jugador "+(numGan+1)+" tiene la mejor mano:\n"+this.jugador[numGan].getMano());
+        } 
+        System.out.println("\n----Jugador "+(numGan+1)+" tiene la mejor mano\n"+"-Tiene: "+this.jugador[numGan].getJugada()+"\n"+this.jugador[numGan].getMano());
     }
 }
